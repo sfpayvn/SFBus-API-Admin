@@ -7,13 +7,11 @@ import { AdminUserTenantModule } from './admin-user-tenant/admin-user-tenant.mod
 import { AdminUserTenantOperatorModule } from './admin-user-tenant-operator/admin-user-tenant-operator.module';
 import { AdminUserDriverModule } from './admin-user-driver/admin-user-driver.module';
 import { AdminUserMainModule } from './admin-user-main/admin-user-main.module';
-import { AdminUserSellerModule } from './admin-user-seller/admin-user-seller.module';
 
 @Module({
   imports: [
     AdminUserMainModule,
     AdminUserPosModule,
-    AdminUserSellerModule,
     AdminUserClientModule,
     AdminUserDriverModule,
     AdminUserTenantModule,
@@ -22,7 +20,6 @@ import { AdminUserSellerModule } from './admin-user-seller/admin-user-seller.mod
   exports: [
     AdminUserMainModule,
     AdminUserPosModule,
-    AdminUserSellerModule,
     AdminUserClientModule,
     AdminUserDriverModule,
     AdminUserTenantModule,
