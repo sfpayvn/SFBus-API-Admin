@@ -79,6 +79,15 @@ export class AdminBusRouteController {
     return this.adminBusRouteService.findOne(id, tenantIds);
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(ROLE_CONSTANTS.ADMIN, ROLE_CONSTANTS.TENANT, ROLE_CONSTANTS.TENANT_OPERATOR)
+  @UseInterceptors(MarkDefaultTenant())
+  @Get('find-by-station/:stationId')
+  findByStationId(@Param('stationId', ParseObjectIdPipe) stationId: Types.ObjectId, @TenantScope() tenantScope: TenantScopeResult) {
+    const { tenantIds } = tenantScope;
+    return this.adminBusRouteService.findByStationId(stationId, tenantIds);
+  }
+
   @Post('search')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @UseInterceptors(MarkDefaultTenant())

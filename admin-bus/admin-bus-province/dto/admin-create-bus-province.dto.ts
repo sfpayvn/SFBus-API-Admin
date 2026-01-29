@@ -6,6 +6,10 @@ export class AdminCreateBusProvinceDto {
   @IsNotEmpty()
   @Type(() => String)
   name: string;
+
+  @IsNotEmpty()
+  @Type(() => Boolean)
+  isActive: boolean;
 }
 
 export class AdminCloneBusProvinceDto {

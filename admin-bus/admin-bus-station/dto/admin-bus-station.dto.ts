@@ -31,6 +31,10 @@ export class AdminBusStationDto {
   isOffice?: boolean;
 
   @Expose()
+  @Transform(({ value }) => value !== false)
+  isActive?: boolean;
+
+  @Expose()
   provinceId: Types.ObjectId;
 
   @Expose()

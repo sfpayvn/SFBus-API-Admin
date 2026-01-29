@@ -77,7 +77,7 @@ export class AdminUploadController {
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(ROLE_CONSTANTS.ADMIN)
+  @Roles(ROLE_CONSTANTS.ADMIN, ROLE_CONSTANTS.TENANT, ROLE_CONSTANTS.TENANT_OPERATOR)
   @Post('upload-file-save-to-media/:folderId')
   uploadFileSaveToMedia(
     @Param('folderId', ParseObjectIdPipe) folderId: Types.ObjectId,

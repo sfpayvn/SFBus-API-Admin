@@ -65,6 +65,9 @@ export class AdminBusScheduleDto {
   busId?: Types.ObjectId;
 
   @Expose()
+  currentStationId: Types.ObjectId;
+
+  @Expose()
   busDriverIds: Types.ObjectId[];
 
   @Expose()

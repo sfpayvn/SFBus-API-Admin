@@ -52,4 +52,8 @@ export class AdminBusRouteService {
   ): Promise<AdminSearchBusRouteRes> {
     return this.busRouteService.search(pageIdx, pageSize, keyword, sortBy, filters, tenantIds);
   }
+
+  async findByStationId(stationId: Types.ObjectId, tenantIds: Types.ObjectId[]): Promise<AdminBusRouteDto[]> {
+    return this.busRouteService.findByStationId(stationId, tenantIds);
+  }
 }

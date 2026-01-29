@@ -93,6 +93,15 @@ export class AdminBusStationController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(ROLE_CONSTANTS.ADMIN, ROLE_CONSTANTS.TENANT, ROLE_CONSTANTS.TENANT_OPERATOR)
   @UseInterceptors(MarkDefaultTenant())
+  @Get('find-offices')
+  findOffices(@TenantScope() tenantScope: TenantScopeResult) {
+    const { tenantIds } = tenantScope;
+    return this.adminBusStationService.findOffices(tenantIds);
+  }
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(ROLE_CONSTANTS.ADMIN, ROLE_CONSTANTS.TENANT, ROLE_CONSTANTS.TENANT_OPERATOR)
+  @UseInterceptors(MarkDefaultTenant())
   @Get(':id')
   findOne(@Param('id', ParseObjectIdPipe) id: Types.ObjectId, @TenantScope() tenantScope: TenantScopeResult) {
     const { tenantIds } = tenantScope;

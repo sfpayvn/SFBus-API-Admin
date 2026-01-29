@@ -54,6 +54,10 @@ export class AdminBusStationService {
     return this.busStationService.findAllAvailable(tenantIds);
   }
 
+  async findOffices(tenantIds: Types.ObjectId[]): Promise<AdminBusStationDto[]> {
+    return this.busStationService.findOffices(tenantIds);
+  }
+
   async findOne(id: Types.ObjectId, tenantIds: Types.ObjectId[]): Promise<AdminBusStationDto> {
     return this.busStationService.findOne(id, tenantIds);
   }

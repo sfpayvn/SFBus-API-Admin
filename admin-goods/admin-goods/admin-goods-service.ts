@@ -5,7 +5,7 @@ import { Model, Types } from 'mongoose';
 import { customAlphabet } from 'nanoid';
 import { GoodsDto } from '@/module/core/goods/goods/dto/goods.dto';
 import { AdminCreateGoodsDto } from './dto/admin-create-goods.dto';
-import { AdminGoodsDto, AdminSearchGoodsPagingQuerySortFilter, AdminSearchGoodsPagingRes } from './dto/admin-goods.dto';
+import { AdminGoodsDto, AdminGoodsSortFilter, AdminSearchGoodsPagingRes } from './dto/admin-goods.dto';
 import { AdminUpdateGoodsDto } from './dto/admin-update-goods.dto';
 import { GoodsService } from '@/module/core/goods/goods/goods-service';
 
@@ -56,8 +56,8 @@ export class AdminGoodsService {
     pageIdx: number,
     pageSize: number,
     keyword: string,
-    sortBy: AdminSearchGoodsPagingQuerySortFilter,
-    filters: AdminSearchGoodsPagingQuerySortFilter[],
+    sortBy: AdminGoodsSortFilter,
+    filters: AdminGoodsSortFilter[],
     tenantId: Types.ObjectId,
   ): Promise<AdminSearchGoodsPagingRes> {
     return this.goodsService.searchGoodsPaging(pageIdx, pageSize, keyword, sortBy, filters, tenantId);

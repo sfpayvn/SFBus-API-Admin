@@ -72,6 +72,15 @@ export class AdminBusProvinceController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(ROLE_CONSTANTS.ADMIN, ROLE_CONSTANTS.TENANT, ROLE_CONSTANTS.TENANT_OPERATOR)
   @UseInterceptors(MarkDefaultTenant())
+  @Get('find-all-available')
+  findAllAvailable(@TenantScope() tenantScope: TenantScopeResult) {
+    const { tenantIds } = tenantScope;
+    return this.adminBusProvinceService.findAvailable(tenantIds);
+  }
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(ROLE_CONSTANTS.ADMIN, ROLE_CONSTANTS.TENANT, ROLE_CONSTANTS.TENANT_OPERATOR)
+  @UseInterceptors(MarkDefaultTenant())
   @Get(':id')
   findOne(@Param('id', ParseObjectIdPipe) id: Types.ObjectId, @TenantScope() tenantScope: TenantScopeResult) {
     const { tenantIds } = tenantScope;
