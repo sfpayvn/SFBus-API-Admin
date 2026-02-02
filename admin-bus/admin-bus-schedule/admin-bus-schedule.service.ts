@@ -62,4 +62,12 @@ export class AdminBusScheduleService {
   ): Promise<AdminSearchBusSchedulePagingRes> {
     return this.busScheduleService.searchBusSchedulePaging(pageIdx, pageSize, keyword, sortBy, filters, tenantId);
   }
+
+  async updateCurrentStation(
+    busScheduleId: Types.ObjectId,
+    currentStationId: Types.ObjectId,
+    tenantId: Types.ObjectId,
+  ): Promise<AdminBusScheduleDto> {
+    return this.busScheduleService.updateCurrentStation(busScheduleId, currentStationId, tenantId);
+  }
 }

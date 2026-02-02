@@ -4,11 +4,13 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AdminPaymentService } from './admin-payment-service';
 import { AdminPaymentController } from './admin-payment.controller';
 import { PaymentModule } from '@/module/core/payment/payment.module';
+import { AdminTrackingModule } from '../admin-tracking/admin-tracking.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: PaymentDocument.name, schema: PaymentSchema }]),
     forwardRef(() => PaymentModule),
+    forwardRef(() => AdminTrackingModule),
   ],
   controllers: [AdminPaymentController],
   providers: [AdminPaymentService],

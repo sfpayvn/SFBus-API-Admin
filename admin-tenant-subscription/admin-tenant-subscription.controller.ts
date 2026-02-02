@@ -51,4 +51,26 @@ export class AdminTenantSubscriptionController {
     } = query;
     return this.adminTenantSubscriptionService.search(+pageIdx, +pageSize, keyword, sortBy, filters);
   }
+
+  @Post('search/my-subscription')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(ROLE_CONSTANTS.ADMIN, ROLE_CONSTANTS.TENANT, ROLE_CONSTANTS.TENANT_OPERATOR)
+  searchMySubscriptions(
+    @Body(ParseObjectIdPipe) query: AdminSearchTenantSubscriptionQuery,
+    @CurrentUser(ParseObjectIdPipe) user: UserTokenDto,
+  ) {
+    const {
+      pageIdx = 0,
+      pageSize = 0,
+      keyword = '',
+      sortBy = {
+        key: 'createdAt',
+        value: 'desc',
+      },
+      filters = [],
+    } = query;
+    const tenantId = new Types.ObjectId(user.tenantId);
+    filters.push({ key: 'tenantId', value: tenantId }); // Giá trị sẽ được gán trong service
+    return this.adminTenantSubscriptionService.searchMySubscriptions(+pageIdx, +pageSize, keyword, sortBy, filters);
+  }
 }

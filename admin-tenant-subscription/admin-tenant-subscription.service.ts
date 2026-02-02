@@ -41,4 +41,14 @@ export class AdminTenantSubscriptionService {
   ): Promise<AdminSearchTenantSubscriptionRes> {
     return this.tenantSubscriptionService.search(pageIdx, pageSize, keyword, sortBy, filters);
   }
+
+  async searchMySubscriptions(
+    pageIdx: number,
+    pageSize: number,
+    keyword: string,
+    sortBy: AdminSearchTenantSubscriptionQuerySortFilter,
+    filters: AdminSearchTenantSubscriptionQuerySortFilter[],
+  ): Promise<AdminSearchTenantSubscriptionRes> {
+    return this.tenantSubscriptionService.search(pageIdx, pageSize, keyword, sortBy, filters);
+  }
 }

@@ -83,7 +83,7 @@ export class AdminRegisterSubscriptionForTenantDto extends AdminRegisterSubscrip
 
 export class AdminSearchTenantSubscriptionQuerySortFilter {
   key: string;
-  value: string;
+  value: string | string[] | Types.ObjectId | Types.ObjectId[];
 }
 
 export class AdminSearchTenantSubscriptionQuery {

@@ -86,6 +86,10 @@ export class AdminBookingDto {
   userId: string;
 
   @Expose()
+  @Type(() => Number)
+  quantity: number;
+
+  @Expose()
   @Type(() => AdminUserInforBookingDto)
   userInfo: AdminUserInforBookingDto;
 

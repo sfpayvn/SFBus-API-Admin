@@ -12,27 +12,38 @@ import { ROLE_CONSTANTS } from '@/common/constants/roles.constants';
 
 @Controller('admin/payment')
 export class AdminPaymentController {
-  constructor(private readonly AdminPaymentService: AdminPaymentService) {}
+  constructor(private readonly adminPaymentService: AdminPaymentService) {}
 
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(ROLE_CONSTANTS.ADMIN, ROLE_CONSTANTS.TENANT, ROLE_CONSTANTS.TENANT_OPERATOR)
   @Post('/processBookingPayment')
   processBookingPayment(
-    @Body(ParseObjectIdPipe) AdminRequestPaymentDto: AdminRequestPaymentDto,
+    @Body(ParseObjectIdPipe) adminRequestPaymentDto: AdminRequestPaymentDto,
     @CurrentUser(ParseObjectIdPipe) user: UserTokenDto,
   ) {
-    const tenantId = user.tenantId;
-    return this.AdminPaymentService.processBookingPayment(AdminRequestPaymentDto, tenantId);
+    const { tenantId, _id } = user;
+    return this.adminPaymentService.processBookingPayment(adminRequestPaymentDto, tenantId, _id);
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(ROLE_CONSTANTS.ADMIN, ROLE_CONSTANTS.TENANT, ROLE_CONSTANTS.TENANT_OPERATOR)
-  @Get('find-by-booking-id/:bookingId')
-  findPaymentByBookingId(
-    @Param('bookingId', ParseObjectIdPipe) bookingId: Types.ObjectId,
+  @Post('/processGoodsPayment')
+  processGoodsPayment(
+    @Body(ParseObjectIdPipe) adminRequestPaymentDto: AdminRequestPaymentDto,
+    @CurrentUser(ParseObjectIdPipe) user: UserTokenDto,
+  ) {
+    const { tenantId, _id } = user;
+    return this.adminPaymentService.processGoodsPayment(adminRequestPaymentDto, tenantId, _id);
+  }
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(ROLE_CONSTANTS.ADMIN, ROLE_CONSTANTS.TENANT, ROLE_CONSTANTS.TENANT_OPERATOR)
+  @Get('find-by-referrent-id/:referrentId')
+  findAllByReferrentId(
+    @Param('referrentId', ParseObjectIdPipe) referrentId: Types.ObjectId,
     @CurrentUser(ParseObjectIdPipe) user: UserTokenDto,
   ) {
     const tenantId = user.tenantId;
-    return this.AdminPaymentService.findPaymentByBookingId(bookingId, tenantId);
+    return this.adminPaymentService.findAllByReferrentId(referrentId, tenantId);
   }
 }

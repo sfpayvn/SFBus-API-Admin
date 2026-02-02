@@ -77,6 +77,18 @@ export class AdminBusScheduleController {
     return this.adminBusScheduleService.update(adminUpdateBusScheduleDto, tenantId);
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(ROLE_CONSTANTS.ADMIN, ROLE_CONSTANTS.TENANT, ROLE_CONSTANTS.TENANT_OPERATOR)
+  @Put('update-current-station/:busScheduleId')
+  updateCurrentStation(
+    @Body('currentStationId', ParseObjectIdPipe) currentStationId: Types.ObjectId,
+    @Param('busScheduleId', ParseObjectIdPipe) busScheduleId: Types.ObjectId,
+    @CurrentUser(ParseObjectIdPipe) user: UserTokenDto,
+  ) {
+    const { tenantId } = user;
+    return this.adminBusScheduleService.updateCurrentStation(busScheduleId, currentStationId, tenantId);
+  }
+
   @Delete(':id')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(ROLE_CONSTANTS.ADMIN, ROLE_CONSTANTS.TENANT, ROLE_CONSTANTS.TENANT_OPERATOR)
